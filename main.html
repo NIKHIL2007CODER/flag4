@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Flag Capture</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+  <script
+    src="https://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system@v4.0.1/dist/aframe-physics-system.min.js"></script>
+  <script src="https://unpkg.com/aframe-physics-extras@0.1.2/dist/aframe-physics-extras.min.js"></script>
+
+<script src="https://recast-api.donmccurdy.com/aframe-inspector-plugin-recast.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+  <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
+  <script src = "shoot.js"></script>
+    <script src="player.js"></script>
+    <script src = "enemy.js"></script>
+    
+</head>
+
+<body>
+
+    <a-scene id="scene" inspector-plugin-recast>
+      <a-assets>
+        <a-asset-item id = "gun" src = "assets/map/scene.gltf"></a-asset-item>
+        <a-asset-item id = "flag-blue" src = "assets/gun/scene.gltf"></a-asset-item>
+        <a-asset-item id = "enemy" src = "assets/player/scene.gltf"></a-asset-item>
+        <a-asset-item id = "flag-enemy" src = "assets/blue/scene.gltf"></a-asset-item>
+        <a-asset-item id = "player" src = "assets/red/scene.gltf"></a-asset-item>
+        <a-asset-item id = "sky" src = "assets/sky/scene.gltf"></a-asset-item>
+        <a-asset-item id = "bullet" src = "assets/7.62_mm_bullet/scene.gltf"></a-asset-item>
+        <a-asset-item id = "map" src = "assets/enemy/scene.gltf"></a-asset-item>
+        <a-asset-item id = "bg" src = "assets/Material__25__background_JPG_002_emissive.jpeg"></a-asset-item>
+
+          <a-asset-item id="collider" src="./navmesh (1).gltf"></a-asset-item>
+
+      </a-assets>
+       
+      
+        <a-entity environment="skyType:gradient; preset:egypt; groundTexture:squares" ></a-entity>
+        
+      <a-entity id = "nav_mesh" gltf-model = "#collider" visible = "false" nav-mesh></a-entity>
+
+      <a-entity
+      id="cameraNav"
+      movement-controls="speed:0.2;constrainToNavMesh:true;" position = "0 0 2">
+        <a-entity id = "cameraElement" camera position = "0 2 -3"  look-controls = "pointerLockEnabled :false"  >
+        
+            <a-entity class = "char" gltf-model = "#gun" position = "0 0 0" scale = "0.02 0.02 0.02" rotation = "0 0 0" 
+            body="type: static; mass: 10; shape: none;" 
+            player-movement
+            ></a-entity>
+
+        </a-entity> 
+      </a-entity>
+        
+        <a-entity  enemies></a-entity>
+       <a-entity gltf-model = "#map" position ="0 0.4 0" scale = "0.002 0.002 0.002" static-body></a-entity>
+        <a-entity bullets ></a-entity>
+
+       <!-- 
+        contact, egypt, checkerboard, forest, goaland, yavapai, goldmine, threetowers, poison, arches, tron, japan, dream, volcano, starry, osiris, moon
+        
+        <a-entity camera position="0 -2 10" wasd-controls >
+        </a-entity>
+        <a-entity environment="skyType:gradient; preset:egypt; groundTexture:squares"></a-entity>
+        <a-box position="0 0 -3" color="cyan"></a-box>
+        -->
+    </a-scene>
+</body>
+
+</html>
